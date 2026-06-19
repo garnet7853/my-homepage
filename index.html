@@ -1,15 +1,9 @@
-import React from 'react';
-import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { About } from './components/About';
-import { Services } from './components/Services';
-import { Testimonials } from './components/Testimonials';
-import { Blog } from './components/Blog';
-import { Philosophy } from './components/Philosophy';
-import { FAQ } from './components/FAQ';
-import { Contact } from './components/Contact';
-import { Footer } from './components/Footer';
+import React, { useEffect, useState } from 'react';
+import { Menu, X, ArrowRight, Loader2, ChevronDown } from 'lucide-react';
 
+// ==========================================
+// 1. App Component (メイン)
+// ==========================================
 export default function App() {
   return (
     <div className="font-sans text-gray-900 bg-white selection:bg-gray-200 selection:text-gray-900 scroll-smooth">
@@ -28,9 +22,10 @@ export default function App() {
     </div>
   );
 }
-import React from 'react';
-import { Menu, X } from 'lucide-react';
 
+// ==========================================
+// 2. Navbar Component
+// ==========================================
 export function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -89,9 +84,10 @@ export function Navbar() {
     </nav>
   );
 }
-      import React from 'react';
-import { ArrowRight } from 'lucide-react';
 
+// ==========================================
+// 3. Hero Component
+// ==========================================
 export function Hero() {
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden">
@@ -141,11 +137,14 @@ export function Hero() {
     </section>
   );
 }
-     import React from 'react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
-import kirishimaImg from '../../imports/ChatGPT_Image_2026_6_19__20_25_03.png';
 
+// ==========================================
+// 4. About Component (インポートエラー箇所を通常のimgに修正)
+// ==========================================
 export function About() {
+  // 画像がない場合の代替用ダミー画像URL（お好みの画像URLに差し替えてください）
+  const profileImageUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=60";
+
   return (
     <section id="about" className="py-24 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-6">
@@ -153,8 +152,8 @@ export function About() {
           {/* Image */}
           <div className="w-full md:w-1/2">
             <div className="aspect-[3/4] max-w-md mx-auto overflow-hidden relative group bg-gray-100">
-              <ImageWithFallback
-                src={kirishimaImg}
+              <img
+                src={profileImageUrl}
                 alt="キリシマレイナ"
                 className="w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-105"
               />
@@ -179,7 +178,7 @@ export function About() {
                 <li>・キャリアの迷い</li>
               </ul>
               <p>
-                に向き合い続けてきました。
+                向き合い続けてきました。
               </p>
               <p>
                 その経験を文章にし、<br />
@@ -199,9 +198,10 @@ export function About() {
     </section>
   );
 }       
-            import React from 'react';
-import { ArrowRight } from 'lucide-react';
 
+// ==========================================
+// 5. Services Component
+// ==========================================
 const services = [
   {
     title: '言語化コーチング',
@@ -251,7 +251,7 @@ export function Services() {
                   <ul className="space-y-3 text-sm text-gray-600 tracking-wide">
                     {service.targets.map((target, i) => (
                       <li key={i} className="flex items-start gap-2">
-                        <span className="text-gray-300 mt-[2px]">•</span>
+                        <span className="text-gray-300 mt-[2px]">.•</span>
                         {target}
                       </li>
                     ))}
@@ -277,8 +277,10 @@ export function Services() {
     </section>
   );
 }
-            import React from 'react';
 
+// ==========================================
+// 6. Testimonials Component (重複を削除し1つに統合)
+// ==========================================
 const testimonials = [
   {
     title: '頭の中のモヤモヤが晴れました',
@@ -345,76 +347,10 @@ export function Testimonials() {
     </section>
   );
 }
-            import React from 'react';
 
-const testimonials = [
-  {
-    title: '頭の中のモヤモヤが晴れました',
-    text: '自分でも何に悩んでいるのか分からなかったのですが、対話を通じて本当にやりたいことが見えてきました。静かに話を聴いてくださる姿勢に安心しました。',
-    type: '言語化コーチング',
-    author: '30代・会社員'
-  },
-  {
-    title: '私の経験も誰かの役に立つと気づけた',
-    text: 'ただの愚痴になっていた文章を、読者に届く「エッセイ」へと昇華させてくれました。自分の感情を客観視する良い機会になりました。',
-    type: 'note・文章添削',
-    author: '40代・育児中'
-  },
-  {
-    title: '法務のキャリアパスが明確に',
-    text: '実務経験に基づく現実的なアドバイスが頂けました。転職活動の軸が定まり、自信を持って面接に臨むことができています。',
-    type: '法務・キャリア相談',
-    author: '20代・法務職'
-  },
-  {
-    title: '自分の強みが言葉になった',
-    text: 'まとまりのない思考から、核となるキーワードを紡ぎ出してくれました。プロフィール文が一新され、新しい仕事の依頼にも繋がりました。',
-    type: '言語化コーチング',
-    author: '30代・フリーランス'
-  },
-  {
-    title: '心温まるインタビュー記事に',
-    text: 'こちらの意図を汲み取りつつ、読者の心に響く美しい文章で仕上げてくださいました。誠実な仕事ぶりに感謝しています。',
-    type: 'ライティング',
-    author: '企業オウンドメディア担当者'
-  },
-  {
-    title: '書くことへの恐怖心が消えた',
-    text: '「正しく書かなくていい」という言葉に救われました。添削も優しく、かつ的確で、もっと書きたいと思えるようになりました。',
-    type: 'note・文章添削',
-    author: '30代・個人事業主'
-  }
-];
-
-export function Testimonials() {
-  return (
-    <section className="py-24 md:py-32 bg-gray-50/50">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-16 text-center">
-          <h2 className="font-serif text-3xl md:text-4xl text-gray-900 tracking-wider mb-4">お客様の声</h2>
-          <div className="w-12 h-[1px] bg-gray-900 mx-auto"></div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((item, idx) => (
-            <div key={idx} className="bg-white p-8 border border-gray-100 flex flex-col gap-6">
-              <div className="space-y-4 flex-grow">
-                <span className="text-xs text-gray-500 tracking-widest block">{item.type}</span>
-                <h3 className="font-serif text-lg text-gray-900">{item.title}</h3>
-                <p className="text-sm text-gray-600 leading-loose tracking-wide">
-                  「{item.text}」
-                </p>
-              </div>
-              <p className="text-xs text-gray-400 text-right">{item.author}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-    import React from 'react';
-
+// ==========================================
+// 7. Philosophy Component
+// ==========================================
 export function Philosophy() {
   return (
     <section id="philosophy" className="py-32 md:py-48 bg-white overflow-hidden relative">
@@ -442,9 +378,10 @@ export function Philosophy() {
     </section>
   );
 }
-            import React, { useEffect, useState } from 'react';
-import { ArrowRight, Loader2 } from 'lucide-react';
 
+// ==========================================
+// 8. Blog Component
+// ==========================================
 const fallbackPosts = [
   {
     title: '「ちゃんとしなきゃ」を手放すための、3つの小さな練習',
@@ -478,7 +415,7 @@ const fallbackPosts = [
     title: '人生の余白の作り方',
     date: '2026.04.20',
     category: 'ライフスタイル',
-    img: 'https://images.unsplash.com/photo-1543233604-3baca4d35513?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2ZmZWUlMjBjdXAlMjBib29rJTIwbWluaW1hbCUyMG1vbm9jaHJvbWV8ZW58MXx8fHwxNzgxMDQ3ODQ3fDA&ixlib=rb-4.1.0&q=80&w=400',
+    img: 'https://images.unsplash.com/photo-1543233604-3baca4d35513?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2ZmZWUlMjBjdXBlJTIwYm9vayUyMG1pbmltYWw%2GZ21vbm9jaHJvbWV8ZW58MXx8fHwxNzgxMDQ3ODQ3fDA&ixlib=rb-4.1.0&q=80&w=400',
     link: '#'
   }
 ];
@@ -495,7 +432,6 @@ export function Blog() {
         
         if (data.status === 'ok' && data.items && data.items.length > 0) {
           const formattedPosts = data.items.slice(0, 5).map((item: any) => {
-            // try to extract image from content if thumbnail is empty
             let imgUrl = item.thumbnail;
             if (!imgUrl && item.content) {
               const imgMatch = item.content.match(/<img[^>]+src="([^">]+)"/);
@@ -506,7 +442,7 @@ export function Blog() {
               title: item.title,
               date: new Date(item.pubDate.replace(/-/g, '/')).toLocaleDateString('ja-JP').replace(/\//g, '.'),
               category: item.categories?.[0] || 'note',
-              img: imgUrl || 'https://images.unsplash.com/photo-1683189238277-7ab96f88d1eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0eXBld3JpdGVyJTIwYmxhY2slMjBhbmQlMjB3aGl0ZXxlbnwxfHx8fDE3ODEwNDc4NTh8MA&ixlib=rb-4.1.0&q=80&w=400',
+              img: imgUrl || fallbackPosts[0].img,
               link: item.link
             };
           });
@@ -575,10 +511,10 @@ export function Blog() {
     </section>
   );
 }
-src/app/components/FAQ.tsx
-import React, { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
 
+// ==========================================
+// 9. FAQ Component
+// ==========================================
 const faqs = [
   {
     q: 'メンタル不調の相談はできますか？',
@@ -644,8 +580,10 @@ export function FAQ() {
     </section>
   );
 }
-    import React from 'react';
 
+// ==========================================
+// 10. Contact Component
+// ==========================================
 export function Contact() {
   return (
     <section id="contact" className="py-24 md:py-32 bg-white">
@@ -743,8 +681,10 @@ export function Contact() {
     </section>
   );
 }
-    import React from 'react';
 
+// ==========================================
+// 11. Footer Component
+// ==========================================
 export function Footer() {
   const links = [
     { name: 'About', href: '#about' },
