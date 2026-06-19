@@ -1,5 +1,149 @@
-TypeScript
 import React from 'react';
+import { Navbar } from './components/Navbar';
+import { Hero } from './components/Hero';
+import { About } from './components/About';
+import { Services } from './components/Services';
+import { Testimonials } from './components/Testimonials';
+import { Blog } from './components/Blog';
+import { Philosophy } from './components/Philosophy';
+import { FAQ } from './components/FAQ';
+import { Contact } from './components/Contact';
+import { Footer } from './components/Footer';
+
+export default function App() {
+  return (
+    <div className="font-sans text-gray-900 bg-white selection:bg-gray-200 selection:text-gray-900 scroll-smooth">
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <Services />
+        <Testimonials />
+        <Blog />
+        <Philosophy />
+        <FAQ />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
+  );
+}
+import React from 'react';
+import { Menu, X } from 'lucide-react';
+
+export function Navbar() {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const links = [
+    { name: 'About', href: '#about' },
+    { name: 'Service', href: '#service' },
+    { name: 'Philosophy', href: '#philosophy' },
+    { name: 'FAQ', href: '#faq' },
+    { name: 'Contact', href: '#contact' },
+  ];
+
+  return (
+    <nav className="fixed w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-100 transition-all duration-300">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <a href="#" className="font-serif text-xl tracking-wider text-gray-900">
+          生き方編集室
+        </a>
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex gap-8 items-center">
+          {links.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="text-sm tracking-widest uppercase text-gray-500 hover:text-gray-900 transition-colors"
+            >
+              {link.name}
+            </a>
+          ))}
+        </div>
+
+        {/* Mobile Toggle */}
+        <button
+          className="md:hidden text-gray-900"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden absolute top-20 left-0 w-full bg-white border-b border-gray-100 py-4 px-6 flex flex-col gap-6 shadow-lg">
+          {links.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="text-sm tracking-widest uppercase text-gray-600 hover:text-gray-900 transition-colors block"
+              onClick={() => setIsOpen(false)}
+            >
+              {link.name}
+            </a>
+          ))}
+        </div>
+      )}
+    </nav>
+  );
+}
+      import React from 'react';
+import { ArrowRight } from 'lucide-react';
+
+export function Hero() {
+  return (
+    <section className="relative min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="https://images.unsplash.com/photo-1562034475-0292da13283a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxxdWlldCUyMGRhcmslMjByb29tJTIwbm90ZWJvb2slMjBkZXNrJTIwbGFtcHxlbnwxfHx8fDE3ODEwNDc4NDZ8MA&ixlib=rb-4.1.0&q=80&w=2000"
+          alt="Quiet dark room with notebook and desk lamp"
+          className="w-full h-full object-cover grayscale opacity-20 object-right"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/30"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 w-full relative z-10 flex flex-col items-start justify-center">
+        <div className="max-w-2xl space-y-10">
+          <div className="space-y-6">
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-gray-900 leading-tight tracking-wide">
+              生きづらさを、<br className="md:hidden" />言葉にする。
+            </h1>
+            <p className="font-serif text-xl md:text-2xl text-gray-600 tracking-wider">
+              書くこと、働くこと、生きること。
+            </p>
+          </div>
+          
+          <p className="text-base md:text-lg text-gray-700 leading-loose tracking-wide max-w-lg">
+            ひとりでは整理できない思考を、<br />
+            文章と対話で言語化します。
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gray-900 text-white rounded-none hover:bg-gray-800 transition-colors tracking-widest text-sm"
+            >
+              相談する
+              <ArrowRight size={16} />
+            </a>
+            <a
+              href="#service"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-gray-900 text-gray-900 bg-transparent hover:bg-gray-50 transition-colors tracking-widest text-sm"
+            >
+              サービスを見る
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+     import React from 'react';
+import { ImageWithFallback } from './figma/ImageWithFallback';
+import kirishimaImg from '../../imports/ChatGPT_Image_2026_6_19__20_25_03.png';
 
 export function About() {
   return (
@@ -9,14 +153,10 @@ export function About() {
           {/* Image */}
           <div className="w-full md:w-1/2">
             <div className="aspect-[3/4] max-w-md mx-auto overflow-hidden relative group bg-gray-100">
-              <img
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1000"
+              <ImageWithFallback
+                src={kirishimaImg}
                 alt="キリシマレイナ"
                 className="w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-105"
-                onError={(e) => {
-                  // 画像の読み込みに失敗した場合のフォールバック
-                  e.currentTarget.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1000";
-                }}
               />
             </div>
           </div>
@@ -58,12 +198,251 @@ export function About() {
       </div>
     </section>
   );
-}
-2. src/app/components/Blog.tsx
-RSSフィードの取得部分で、万が一item.pubDateの形式が想定外だった場合に日付のパースで画面全体が真っ白（またはコードが露出）になるのを防ぐため、より安全なエラーハンドリングを追加しました。
+}       
+            import React from 'react';
+import { ArrowRight } from 'lucide-react';
 
-TypeScript
-import React, { useEffect, useState } from 'react';
+const services = [
+  {
+    title: '言語化コーチング',
+    targets: ['頭の中が整理できない', '仕事が辛い', '将来が不安', '気持ちを言葉にしたい'],
+    price: '60分 8,000円',
+  },
+  {
+    title: 'note・文章添削',
+    targets: ['noteを書いている', '伝わる文章を書きたい', '自分の強みが分からない'],
+    price: '1記事 5,000円〜',
+  },
+  {
+    title: 'ライティング',
+    targets: ['コラム', 'エッセイ', 'インタビュー記事', 'オウンドメディア'],
+    price: '要見積',
+    isTask: true,
+  },
+  {
+    title: '法務・キャリア相談',
+    targets: ['法務職転職', 'キャリア相談', '働き方相談'],
+    price: '60分 10,000円',
+    isTask: true,
+  },
+];
+
+export function Services() {
+  return (
+    <section id="service" className="py-24 md:py-32 bg-gray-50/50">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16 space-y-4">
+          <h2 className="font-serif text-3xl md:text-4xl text-gray-900 tracking-wider">サービス</h2>
+          <div className="w-12 h-[1px] bg-gray-900 mx-auto"></div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
+          {services.map((service, idx) => (
+            <div key={idx} className="bg-white p-8 md:p-12 border border-gray-100 hover:border-gray-300 transition-colors flex flex-col h-full group">
+              <h3 className="font-serif text-xl md:text-2xl text-gray-900 tracking-wide mb-8">
+                {service.title}
+              </h3>
+              
+              <div className="flex-grow space-y-8">
+                <div>
+                  <p className="text-xs text-gray-400 tracking-widest uppercase mb-4">
+                    {service.isTask ? '対応内容' : 'こんな方へ'}
+                  </p>
+                  <ul className="space-y-3 text-sm text-gray-600 tracking-wide">
+                    {service.targets.map((target, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-gray-300 mt-[2px]">•</span>
+                        {target}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <div className="pt-8 border-t border-gray-50">
+                  <p className="text-xs text-gray-400 tracking-widest uppercase mb-2">料金</p>
+                  <p className="font-serif text-lg text-gray-900">{service.price}</p>
+                </div>
+              </div>
+
+              <a
+                href="#contact"
+                className="mt-10 inline-flex items-center gap-2 text-sm text-gray-900 tracking-widest group-hover:gap-4 transition-all"
+              >
+                詳細を見る <ArrowRight size={16} />
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+            import React from 'react';
+
+const testimonials = [
+  {
+    title: '頭の中のモヤモヤが晴れました',
+    text: '自分でも何に悩んでいるのか分からなかったのですが、対話を通じて本当にやりたいことが見えてきました。静かに話を聴いてくださる姿勢に安心しました。',
+    type: '言語化コーチング',
+    author: '30代・会社員'
+  },
+  {
+    title: '私の経験も誰かの役に立つと気づけた',
+    text: 'ただの愚痴になっていた文章を、読者に届く「エッセイ」へと昇華させてくれました。自分の感情を客観視する良い機会になりました。',
+    type: 'note・文章添削',
+    author: '40代・育児中'
+  },
+  {
+    title: '法務のキャリアパスが明確に',
+    text: '実務経験に基づく現実的なアドバイスが頂けました。転職活動の軸が定まり、自信を持って面接に臨むことができています。',
+    type: '法務・キャリア相談',
+    author: '20代・法務職'
+  },
+  {
+    title: '自分の強みが言葉になった',
+    text: 'まとまりのない思考から、核となるキーワードを紡ぎ出してくれました。プロフィール文が一新され、新しい仕事の依頼にも繋がりました。',
+    type: '言語化コーチング',
+    author: '30代・フリーランス'
+  },
+  {
+    title: '心温まるインタビュー記事に',
+    text: 'こちらの意図を汲み取りつつ、読者の心に響く美しい文章で仕上げてくださいました。誠実な仕事ぶりに感謝しています。',
+    type: 'ライティング',
+    author: '企業オウンドメディア担当者'
+  },
+  {
+    title: '書くことへの恐怖心が消えた',
+    text: '「正しく書かなくていい」という言葉に救われました。添削も優しく、かつ的確で、もっと書きたいと思えるようになりました。',
+    type: 'note・文章添削',
+    author: '30代・個人事業主'
+  }
+];
+
+export function Testimonials() {
+  return (
+    <section className="py-24 md:py-32 bg-gray-50/50">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="mb-16 text-center">
+          <h2 className="font-serif text-3xl md:text-4xl text-gray-900 tracking-wider mb-4">お客様の声</h2>
+          <div className="w-12 h-[1px] bg-gray-900 mx-auto"></div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {testimonials.map((item, idx) => (
+            <div key={idx} className="bg-white p-8 border border-gray-100 flex flex-col gap-6">
+              <div className="space-y-4 flex-grow">
+                <span className="text-xs text-gray-500 tracking-widest block">{item.type}</span>
+                <h3 className="font-serif text-lg text-gray-900">{item.title}</h3>
+                <p className="text-sm text-gray-600 leading-loose tracking-wide">
+                  「{item.text}」
+                </p>
+              </div>
+              <p className="text-xs text-gray-400 text-right">{item.author}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+            import React from 'react';
+
+const testimonials = [
+  {
+    title: '頭の中のモヤモヤが晴れました',
+    text: '自分でも何に悩んでいるのか分からなかったのですが、対話を通じて本当にやりたいことが見えてきました。静かに話を聴いてくださる姿勢に安心しました。',
+    type: '言語化コーチング',
+    author: '30代・会社員'
+  },
+  {
+    title: '私の経験も誰かの役に立つと気づけた',
+    text: 'ただの愚痴になっていた文章を、読者に届く「エッセイ」へと昇華させてくれました。自分の感情を客観視する良い機会になりました。',
+    type: 'note・文章添削',
+    author: '40代・育児中'
+  },
+  {
+    title: '法務のキャリアパスが明確に',
+    text: '実務経験に基づく現実的なアドバイスが頂けました。転職活動の軸が定まり、自信を持って面接に臨むことができています。',
+    type: '法務・キャリア相談',
+    author: '20代・法務職'
+  },
+  {
+    title: '自分の強みが言葉になった',
+    text: 'まとまりのない思考から、核となるキーワードを紡ぎ出してくれました。プロフィール文が一新され、新しい仕事の依頼にも繋がりました。',
+    type: '言語化コーチング',
+    author: '30代・フリーランス'
+  },
+  {
+    title: '心温まるインタビュー記事に',
+    text: 'こちらの意図を汲み取りつつ、読者の心に響く美しい文章で仕上げてくださいました。誠実な仕事ぶりに感謝しています。',
+    type: 'ライティング',
+    author: '企業オウンドメディア担当者'
+  },
+  {
+    title: '書くことへの恐怖心が消えた',
+    text: '「正しく書かなくていい」という言葉に救われました。添削も優しく、かつ的確で、もっと書きたいと思えるようになりました。',
+    type: 'note・文章添削',
+    author: '30代・個人事業主'
+  }
+];
+
+export function Testimonials() {
+  return (
+    <section className="py-24 md:py-32 bg-gray-50/50">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="mb-16 text-center">
+          <h2 className="font-serif text-3xl md:text-4xl text-gray-900 tracking-wider mb-4">お客様の声</h2>
+          <div className="w-12 h-[1px] bg-gray-900 mx-auto"></div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {testimonials.map((item, idx) => (
+            <div key={idx} className="bg-white p-8 border border-gray-100 flex flex-col gap-6">
+              <div className="space-y-4 flex-grow">
+                <span className="text-xs text-gray-500 tracking-widest block">{item.type}</span>
+                <h3 className="font-serif text-lg text-gray-900">{item.title}</h3>
+                <p className="text-sm text-gray-600 leading-loose tracking-wide">
+                  「{item.text}」
+                </p>
+              </div>
+              <p className="text-xs text-gray-400 text-right">{item.author}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+    import React from 'react';
+
+export function Philosophy() {
+  return (
+    <section id="philosophy" className="py-32 md:py-48 bg-white overflow-hidden relative">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-24 bg-gray-200"></div>
+      
+      <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+        <h2 className="text-xs tracking-widest text-gray-400 uppercase mb-20 font-sans">Philosophy</h2>
+        
+        <div className="mb-20">
+          <p className="font-serif text-2xl md:text-4xl text-gray-900 leading-[2.5] tracking-widest">
+            人は問題を解決したいのではなく、<br />
+            理解されたいのだと思っています。
+          </p>
+        </div>
+
+        <div className="w-12 h-[1px] bg-gray-300 mx-auto mb-20"></div>
+
+        <div className="space-y-8 font-serif text-lg md:text-xl text-gray-600 leading-loose tracking-wider">
+          <p>アドバイスより先に、<br />言葉にならない感情を整理する。</p>
+          <p>それが私の仕事です。</p>
+        </div>
+      </div>
+
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1px] h-24 bg-gray-200"></div>
+    </section>
+  );
+}
+            import React, { useEffect, useState } from 'react';
 import { ArrowRight, Loader2 } from 'lucide-react';
 
 const fallbackPosts = [
@@ -99,7 +478,7 @@ const fallbackPosts = [
     title: '人生の余白の作り方',
     date: '2026.04.20',
     category: 'ライフスタイル',
-    img: 'https://images.unsplash.com/photo-1543233604-3baca4d35513?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2ZmZWUlMjBjdXBlJTIwYm9vayUyMG1pbmltYWw%2BCW1vbm9jaHJvbWV8ZW58MXx8fHwxNzgxMDQ3ODQ3fDA&ixlib=rb-4.1.0&q=80&w=400',
+    img: 'https://images.unsplash.com/photo-1543233604-3baca4d35513?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2ZmZWUlMjBjdXAlMjBib29rJTIwbWluaW1hbCUyMG1vbm9jaHJvbWV8ZW58MXx8fHwxNzgxMDQ3ODQ3fDA&ixlib=rb-4.1.0&q=80&w=400',
     link: '#'
   }
 ];
@@ -116,28 +495,18 @@ export function Blog() {
         
         if (data.status === 'ok' && data.items && data.items.length > 0) {
           const formattedPosts = data.items.slice(0, 5).map((item: any) => {
+            // try to extract image from content if thumbnail is empty
             let imgUrl = item.thumbnail;
             if (!imgUrl && item.content) {
               const imgMatch = item.content.match(/<img[^>]+src="([^">]+)"/);
               if (imgMatch) imgUrl = imgMatch[1];
             }
             
-            // 日付のパースを安全に行う
-            let displayDate = '----.--.--';
-            try {
-              if (item.pubDate) {
-                const cleanDate = item.pubDate.replace(/-/g, '/');
-                displayDate = new Date(cleanDate).toLocaleDateString('ja-JP').replace(/\//g, '.');
-              }
-            } catch (e) {
-              // パース失敗時はそのままかフォールバック
-            }
-
             return {
               title: item.title,
-              date: displayDate,
+              date: new Date(item.pubDate.replace(/-/g, '/')).toLocaleDateString('ja-JP').replace(/\//g, '.'),
               category: item.categories?.[0] || 'note',
-              img: imgUrl || 'https://images.unsplash.com/photo-1683189238277-7ab96f88d1eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400',
+              img: imgUrl || 'https://images.unsplash.com/photo-1683189238277-7ab96f88d1eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0eXBld3JpdGVyJTIwYmxhY2slMjBhbmQlMjB3aGl0ZXxlbnwxfHx8fDE3ODEwNDc4NTh8MA&ixlib=rb-4.1.0&q=80&w=400',
               link: item.link
             };
           });
@@ -204,5 +573,224 @@ export function Blog() {
         </div>
       </div>
     </section>
+  );
+}
+src/app/components/FAQ.tsx
+import React, { useState } from 'react';
+import { ChevronDown } from 'lucide-react';
+
+const faqs = [
+  {
+    q: 'メンタル不調の相談はできますか？',
+    a: '医療行為はできませんが、経験者としてお話を伺います。必要に応じて、専門機関の受診をお勧めすることがあります。'
+  },
+  {
+    q: 'オンラインのみですか？',
+    a: '基本的にはチャットベースでの対応となります。'
+  },
+  {
+    q: '法律相談はできますか？',
+    a: '弁護士業務は行えません。一般的な法務キャリアについての相談や、法務部門の働き方についてのメンタリングとなります。'
+  },
+  {
+    q: 'ライティングの実績はどのようなものがありますか？',
+    a: '転職サイト、出前アプリ、レンタル彼氏等、多様なサービスのPR実績があります。また、自社オウンドメディアの記事監修・執筆も担当しております。'
+  }
+];
+
+export function FAQ() {
+  const [openIdx, setOpenIdx] = useState<number | null>(0);
+
+  return (
+    <section id="faq" className="py-24 md:py-32 bg-gray-50/50">
+      <div className="max-w-3xl mx-auto px-6">
+        <div className="mb-16 text-center">
+          <h2 className="font-serif text-3xl md:text-4xl text-gray-900 tracking-wider mb-4">よくあるご質問</h2>
+          <div className="w-12 h-[1px] bg-gray-900 mx-auto"></div>
+        </div>
+
+        <div className="space-y-4">
+          {faqs.map((faq, idx) => (
+            <div key={idx} className="bg-white border border-gray-100">
+              <button
+                onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
+                className="w-full px-6 py-6 flex items-center justify-between text-left focus:outline-none"
+              >
+                <span className="font-serif text-gray-900 tracking-wide pr-8">
+                  Q. {faq.q}
+                </span>
+                <ChevronDown
+                  size={20}
+                  className={`text-gray-400 transition-transform duration-300 shrink-0 ${
+                    openIdx === idx ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+              
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  openIdx === idx ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                }`}
+              >
+                <div className="px-6 pb-6 pt-2 text-gray-600 leading-relaxed tracking-wide text-sm border-t border-gray-50 mx-6">
+                  <span className="font-serif text-gray-400 mr-2">A.</span>
+                  {faq.a}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+    import React from 'react';
+
+export function Contact() {
+  return (
+    <section id="contact" className="py-24 md:py-32 bg-white">
+      <div className="max-w-3xl mx-auto px-6">
+        <div className="mb-16 text-center">
+          <h2 className="font-serif text-3xl md:text-4xl text-gray-900 tracking-wider mb-4">お問い合わせ</h2>
+          <div className="w-12 h-[1px] bg-gray-900 mx-auto"></div>
+          <p className="mt-8 text-sm text-gray-500 tracking-wide">
+            ご相談・お見積もりなど、お気軽にお問い合わせください。<br className="hidden sm:block" />
+            通常2営業日以内にご返信いたします。
+          </p>
+        </div>
+
+        <form className="space-y-8" action="https://formsubmit.co/y746234@yahoo.co.jp" method="POST">
+          <input type="hidden" name="_subject" value="【生き方編集室】新しいお問い合わせ" />
+          <input type="hidden" name="_captcha" value="false" />
+          
+          <div className="space-y-2">
+            <label htmlFor="name" className="block text-sm tracking-widest text-gray-700">
+              お名前 <span className="text-gray-400 text-xs ml-2">*</span>
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              className="w-full border-b border-gray-200 py-3 bg-transparent focus:outline-none focus:border-gray-900 transition-colors rounded-none placeholder:text-gray-300"
+              placeholder="山田 太郎"
+              required
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="email" className="block text-sm tracking-widest text-gray-700">
+              メールアドレス <span className="text-gray-400 text-xs ml-2">*</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              className="w-full border-b border-gray-200 py-3 bg-transparent focus:outline-none focus:border-gray-900 transition-colors rounded-none placeholder:text-gray-300"
+              placeholder="mail@example.com"
+              required
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="service" className="block text-sm tracking-widest text-gray-700">
+              希望サービス
+            </label>
+            <div className="relative">
+              <select
+                id="service"
+                name="service"
+                className="w-full border-b border-gray-200 py-3 bg-transparent focus:outline-none focus:border-gray-900 transition-colors rounded-none appearance-none text-gray-700 cursor-pointer"
+              >
+                <option value="">選択してください</option>
+                <option value="coaching">言語化コーチング</option>
+                <option value="note">note・文章添削</option>
+                <option value="writing">ライティング</option>
+                <option value="career">法務・キャリア相談</option>
+                <option value="other">その他</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+                <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="message" className="block text-sm tracking-widest text-gray-700">
+              相談内容 <span className="text-gray-400 text-xs ml-2">*</span>
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows={6}
+              className="w-full border border-gray-200 p-4 bg-transparent focus:outline-none focus:border-gray-900 transition-colors rounded-none placeholder:text-gray-300 resize-none mt-2"
+              placeholder="現在の状況や、お悩みについてお書きください。"
+              required
+            ></textarea>
+          </div>
+
+          <div className="pt-8 text-center">
+            <button
+              type="submit"
+              className="px-12 py-4 bg-gray-900 text-white hover:bg-gray-800 transition-colors tracking-widest text-sm w-full sm:w-auto"
+            >
+              問い合わせる
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  );
+}
+    import React from 'react';
+
+export function Footer() {
+  const links = [
+    { name: 'About', href: '#about' },
+    { name: 'Service', href: '#service' },
+    { name: 'FAQ', href: '#faq' },
+    { name: 'Contact', href: '#contact' },
+  ];
+
+  return (
+    <footer className="bg-gray-900 text-white py-16 md:py-24">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-12">
+          
+          <div className="text-center md:text-left space-y-4">
+            <h2 className="font-serif text-2xl tracking-widest">生き方編集室</h2>
+            <p className="text-gray-400 text-sm tracking-widest">by キリシマレイナ</p>
+          </div>
+
+          <div className="flex flex-col items-center md:items-end gap-8">
+            <div className="flex flex-wrap justify-center gap-6 md:gap-8">
+              {links.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="text-xs tracking-widest uppercase text-gray-400 hover:text-white transition-colors"
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
+            
+            <div className="flex items-center gap-6">
+              <a href="https://note.com/reina_kirishima" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors text-sm tracking-wider">
+                note
+              </a>
+            </div>
+          </div>
+
+        </div>
+        
+        <div className="mt-20 pt-8 border-t border-gray-800 text-center md:text-left">
+          <p className="text-xs text-gray-500 tracking-widest">
+            © {new Date().getFullYear()} Reina Kirishima. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
   );
 }
